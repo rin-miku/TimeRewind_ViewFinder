@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -568,6 +569,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 33.64, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b96b0c4d760c74c9277f96a8331833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material: {fileID: 2100000, guid: 54505450e297d264dbd09566ab1b1def, type: 2}
+  isLowResolution: 1
+  lowResolutionMultiple: 4
+  isScreenJump: 1
+  screenJumpFrequency: 1
+  screenJumpMinLength: 0.01
+  screenJumpMaxLength: 0.2
+  screenJumpMinOffset: 0.1
+  screenJumpMaxOffset: 0.9
+  isFrickering: 1
+  flickeringStrength: 0.002
+  flickeringCycle: 50
+  isSlippage: 1
+  isSlippageNoise: 1
+  slippageStrength: 0.005
+  slippageSize: 11
+  slippageInterval: 1
+  slippageScrollSpeed: 33
+  isChromaticAberration: 1
+  chromaticAberrationStrength: 0.005
+  isMultipleGhostStrength: 1
+  multipleGhostStrength: 0.01
+  isScanline: 1
+  isScanlineNoise: 1
+  scanlineFrequency: 700
+  isMonochorme: 0
+  isFilmDirt: 0
+  filmDirtTex: {fileID: 2800000, guid: 284a8e7b79bbc1b438b48a6dc75f0887, type: 3}
+  isDecal: 1
+  decalTexPos: {x: 0.74, y: 0.09}
+  decalTexScale: {x: 5, y: 20}
+  decalTex: {fileID: 2800000, guid: 65d242f6ee638f141a9d98ba4d6bdf86, type: 3}
 --- !u!1 &1293976741
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,6 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a921c9d5676c1f419bf2cf5caf2d446, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rewindBufferLength: 0
 --- !u!4 &1674690349
 Transform:
   m_ObjectHideFlags: 0

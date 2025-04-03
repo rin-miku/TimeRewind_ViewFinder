@@ -8,7 +8,7 @@ public struct AnimatorValues
     public int nextStateNameHash;
     public float normalizedTime;
     public float nextNormalizedTime;
-    public bool inTransition;
+    public bool enterTransition;
 
     public override string ToString()
     {
@@ -17,7 +17,7 @@ public struct AnimatorValues
             $"nextStateNameHash:\n{nextStateNameHash}\n" +
             $"normalizedTime:\n{normalizedTime}\n" +
             $"nextNormalizedTime\n:{nextNormalizedTime}\n" +
-            $"inTransition\n:{inTransition}\n";
+            $"enterTransition\n:{enterTransition}\n";
     }
 }
 
@@ -66,7 +66,7 @@ public class Rewind_Animator : RewindBase
             animatorValues.nextStateNameHash = nextAnimatorStateInfo.shortNameHash;
             animatorValues.normalizedTime = animatorStateInfo.normalizedTime;
             animatorValues.nextNormalizedTime = nextAnimatorStateInfo.normalizedTime;
-            animatorValues.inTransition = animatorClipInfos.Length > 0;
+            animatorValues.enterTransition = animatorClipInfos.Length > 0;
             animatorBufferList[i].WriteBuffer(animatorValues);
 
             logText.text = animatorValues.ToString();
@@ -91,7 +91,7 @@ public class Rewind_Animator : RewindBase
         {
             AnimatorValues animatorValues = animatorBufferList[i].ReadBuffer();
 
-            if (animatorValues.inTransition)
+            if (animatorValues.enterTransition)
             {
                 animator.Play(animatorValues.nextStateNameHash, i, animatorValues.nextNormalizedTime);
             }

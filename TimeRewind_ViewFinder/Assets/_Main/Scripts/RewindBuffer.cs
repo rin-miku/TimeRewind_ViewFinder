@@ -15,19 +15,16 @@ public class RewindBuffer<T>
 
     public void WriteBuffer(T values)
     {
-        position++;
-        if (position >= buffers.Length)
-        {
-            Resize();
-        }
+        if (position >= buffers.Length) Resize();
         buffers[position] = values;
+        position++;
     }
 
     public T ReadBuffer()
     {
+        position--;
         if (position < 0) return default;
         T values = buffers[position];
-        position--;
         return values;
     }
 }
