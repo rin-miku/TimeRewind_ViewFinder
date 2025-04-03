@@ -14,19 +14,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.57619846
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.099999905
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -2.74
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalRotation.x
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       propertyPath: m_LocalRotation.z
@@ -65,19 +65,110 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1689642826138409205}
+      insertIndex: 1
+      addedObject: {fileID: 3541426426991021633}
+    - targetCorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 8343287170603863037}
+    - targetCorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 34588502427923678}
+    - targetCorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 8536680355010304196}
     - targetCorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3541426426991021633}
+      addedObject: {fileID: 6994763228553872554}
+    - targetCorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4697126122606425097}
   m_SourcePrefab: {fileID: 100100000, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
 --- !u!1 &8534810558969444610 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100128, guid: 09ee6999e5a6c184ca5913858b11e4a3, type: 3}
   m_PrefabInstance: {fileID: 8534810558969544226}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &1689642826138409205
-CharacterController:
+--- !u!114 &3541426426991021633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534810558969444610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2e4566fb0652f549acd6db949b8bbac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpForce: 5
+  rotationSpeed: 10
+--- !u!114 &8343287170603863037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534810558969444610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b9487777d2b2ce43b28991b562b06b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &34588502427923678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534810558969444610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a00d8f80b39e14c81a156565413035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8536680355010304196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534810558969444610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7097a6ecfdc57438b5dcf6a5308392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logText: {fileID: 0}
+--- !u!54 &6994763228553872554
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8534810558969444610}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &4697126122606425097
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -94,27 +185,8 @@ CharacterController:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1.2
+  serializedVersion: 2
   m_Radius: 0.3
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.58, z: 0}
---- !u!114 &3541426426991021633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8534810558969444610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2e4566fb0652f549acd6db949b8bbac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpForce: 5
-  gravity: -9.8
-  rotationSpeed: 1000
+  m_Height: 1.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.57, z: 0}
