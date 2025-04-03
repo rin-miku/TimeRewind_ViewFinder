@@ -30,16 +30,4 @@ public class RewindBuffer<T>
         position--;
         return values;
     }
-
-    public T ReadLastBuffer()
-    {
-        if (position <= 0)
-        {
-            return default;
-        }
-        else
-        {
-            return buffers[position];
-        }
-    }
 }

@@ -5,21 +5,20 @@ using UnityEngine;
 public struct AnimatorValues
 {
     public int stateNameHash;
-    public float stateTime;
-    public float clipLength;
+    public int nextStateNameHash;
     public float normalizedTime;
-    public AnimatorTransitionValues animatorTransitionValues;
-}
-
-public struct AnimatorTransitionValues
-{
+    public float nextNormalizedTime;
     public bool inTransition;
-    public int stateHashName;
-    public int currentStateHashName;
-    public DurationUnit durationUnit;
-    public float duration;
-    public float normalizedTime;
-    public float t;
+
+    public override string ToString()
+    {
+        return
+            $"stateNameHash:\n{stateNameHash}\n" +
+            $"nextStateNameHash:\n{nextStateNameHash}\n" +
+            $"normalizedTime:\n{normalizedTime}\n" +
+            $"nextNormalizedTime\n:{nextNormalizedTime}\n" +
+            $"inTransition\n:{inTransition}\n";
+    }
 }
 
 public struct AnimatorParameterValues
@@ -59,60 +58,18 @@ public class Rewind_Animator : RewindBase
         for(int i = 0; i < animator.layerCount; i++)
         {
             AnimatorStateInfo animatorStateInfo = animator.GetCurrentAnimatorStateInfo(i);
-            AnimatorStateInfo animatorNextStateInfo = animator.GetNextAnimatorStateInfo(i);
+            AnimatorStateInfo nextAnimatorStateInfo = animator.GetNextAnimatorStateInfo(i);
             AnimatorClipInfo[] animatorClipInfos = animator.GetNextAnimatorClipInfo(i);
-            AnimatorValues lastAnimatorValues = animatorBufferList[i].ReadLastBuffer();
 
-            AnimatorTransitionValues animatorTransitionValues;
-            if (animatorClipInfos.Length > 0)
-            {
-                AnimatorTransitionInfo animatorTransitionInfo = animator.GetAnimatorTransitionInfo(i);
-                animatorTransitionValues.inTransition = true;
-                animatorTransitionValues.stateHashName = Animator.StringToHash(animatorClipInfos[0].clip.name);
-                animatorTransitionValues.currentStateHashName = animatorStateInfo.shortNameHash;
-                animatorTransitionValues.durationUnit = animatorTransitionInfo.durationUnit;
-                animatorTransitionValues.duration = animatorTransitionInfo.duration;
-                animatorTransitionValues.normalizedTime = animatorTransitionInfo.normalizedTime;
-                animatorTransitionValues.t = lastAnimatorValues.animatorTransitionValues.t + Time.fixedDeltaTime;
-            }
-            else
-            {
-                animatorTransitionValues.inTransition = false;
-                animatorTransitionValues.stateHashName = 0;
-                animatorTransitionValues.currentStateHashName = 0;
-                animatorTransitionValues.durationUnit = DurationUnit.Fixed;
-                animatorTransitionValues.duration = 0;
-                animatorTransitionValues.normalizedTime = 0;
-                animatorTransitionValues.t = 0;
-            }
-
-            //AnimatorValues lastAnimatorValues = animatorBufferList[i].ReadLastBuffer();
-            AnimatorValues animatorValues;
+            AnimatorValues animatorValues = new AnimatorValues();
             animatorValues.stateNameHash = animatorStateInfo.shortNameHash;
-            if (lastAnimatorValues.stateNameHash.Equals(animatorValues.stateNameHash))
-            {
-                animatorValues.stateTime = lastAnimatorValues.stateTime + Time.fixedDeltaTime;
-                animatorValues.clipLength = lastAnimatorValues.clipLength;
-            }
-            else
-            {
-                animatorValues.stateTime = 0f;
-                animatorValues.clipLength = animatorStateInfo.length;
-            }
+            animatorValues.nextStateNameHash = nextAnimatorStateInfo.shortNameHash;
             animatorValues.normalizedTime = animatorStateInfo.normalizedTime;
-            animatorValues.animatorTransitionValues = animatorTransitionValues;
+            animatorValues.nextNormalizedTime = nextAnimatorStateInfo.normalizedTime;
+            animatorValues.inTransition = animatorClipInfos.Length > 0;
             animatorBufferList[i].WriteBuffer(animatorValues);
 
-            logText.text = 
-                $"id:\t{animatorStateInfo.shortNameHash}\n" +
-                $"d:\t{animatorNextStateInfo.normalizedTime}\n" +
-                $"tC:\t{animatorValues.stateTime / animatorValues.clipLength}\n" +
-                $"tN:\t{animatorStateInfo.normalizedTime}\n" +
-                $"hasTs:{animatorTransitionValues.inTransition}\n" +
-                $"tsId:\t{animatorTransitionValues.stateHashName}\n" +
-                $"tsD:\t{animatorTransitionValues.duration}\n" +
-                $"tsN:\t{animatorTransitionValues.normalizedTime}\n" +
-                $"t:\t{animatorTransitionValues.t}";
+            logText.text = animatorValues.ToString();
         }
 
         for(int i = 0; i < animatorControllerParameters.Length; i++)
@@ -134,36 +91,16 @@ public class Rewind_Animator : RewindBase
         {
             AnimatorValues animatorValues = animatorBufferList[i].ReadBuffer();
 
-            //animator.Play(animatorValues.stateNameHash, i, animatorValues.stateTime / animatorValues.clipLength);
-            //animator.Play(animatorValues.stateNameHash, i, animatorValues.normalizedTime);
-            AnimatorTransitionValues animatorTransitionValues = animatorValues.animatorTransitionValues;
-            if (animatorValues.animatorTransitionValues.inTransition)
+            if (animatorValues.inTransition)
             {
-                animator.Play(animatorValues.stateNameHash, i, animatorValues.normalizedTime);
-                animator.Update(0);
-                //AnimatorTransitionValues animatorTransitionValues = animatorValues.animatorTransitionValues;
-                if (animatorValues.animatorTransitionValues.durationUnit.Equals(DurationUnit.Fixed))
-                {
-                    animator.CrossFadeInFixedTime(animatorTransitionValues.stateHashName, animatorTransitionValues.duration, i, 0, animatorTransitionValues.normalizedTime);
-                }
-                else
-                {
-                    animator.CrossFade(animatorTransitionValues.stateHashName, animatorTransitionValues.duration, i, 0, animatorTransitionValues.normalizedTime);
-                }
+                animator.Play(animatorValues.nextStateNameHash, i, animatorValues.nextNormalizedTime);
             }
             else
             {
                 animator.Play(animatorValues.stateNameHash, i, animatorValues.normalizedTime);
             }
 
-            logText.text =
-                $"id:\t{animatorValues.stateNameHash}\n" +
-                $"tC:\t{animatorValues.stateTime / animatorValues.clipLength}\n" +
-                $"tN:\t{animatorTransitionValues.normalizedTime}\n" +
-                $"hasTs:{animatorTransitionValues.inTransition}\n" +
-                $"tsId:\t{animatorTransitionValues.stateHashName}\n" +
-                $"tsD:\t{animatorTransitionValues.duration}\n" +
-                $"tsN:\t{animatorTransitionValues.normalizedTime}";
+            logText.text = animatorValues.ToString();
         }
 
         for(int i = 0; i < animatorControllerParameters.Length; i++)
