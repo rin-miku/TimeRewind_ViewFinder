@@ -7,6 +7,7 @@ public class RewindController : MonoBehaviour
 {
     private PlayerController playerController;
     private CRTEffect crtEffect;
+    private AudioSource audioSource;
     [SerializeField]private int rewindBufferLength;
     private Coroutine rewindCoroutine;
     private List<RewindBase> rewinds;
@@ -16,8 +17,9 @@ public class RewindController : MonoBehaviour
 
     private void Start()
     {
-        crtEffect = FindAnyObjectByType<CRTEffect>();
         playerController = FindAnyObjectByType<PlayerController>();
+        crtEffect = FindAnyObjectByType<CRTEffect>();
+        audioSource = GetComponent<AudioSource>();
         rewinds = FindObjectsByType<RewindBase>(FindObjectsSortMode.None).ToList();
     }
 
@@ -25,30 +27,20 @@ public class RewindController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            rewindState = RewindState.Fixed;
-            playerController.enabled = false;
-            crtEffect.enabled = true;
+            StartRewind(RewindState.Fixed);
         }
         if (Input.GetKeyUp(KeyCode.R))
         {
-            rewindState = RewindState.None;
-            playerController.enabled = true;
-            crtEffect.enabled = false;
+            StopRewind();
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            rewindState = RewindState.Interval;
-            rewindCoroutine = StartCoroutine(RewindByInterval(0.005f));
-            playerController.enabled = false;
-            crtEffect.enabled = true;
+            StartRewind(RewindState.Interval);
         }
         if (Input.GetKeyUp(KeyCode.T))
         {
-            rewindState = RewindState.None;
-            StopCoroutine(rewindCoroutine);
-            playerController.enabled = true;
-            crtEffect.enabled = false;
+            StopRewind();
         }
     }
 
@@ -70,7 +62,7 @@ public class RewindController : MonoBehaviour
                 rewind.Rewind();
             }
             rewindBufferLength--;
-            if (rewindBufferLength <= 0) rewindState = RewindState.None;
+            if (rewindBufferLength <= 0) StopRewind();
         }
     }
 
@@ -85,10 +77,36 @@ public class RewindController : MonoBehaviour
             rewindBufferLength--;
             if (rewindBufferLength <= 0) 
             {
-                rewindState = RewindState.None;
+                StopRewind();
                 yield break;
             } 
             yield return new WaitForSeconds(interval);
         }
+    }
+
+    private void StartRewind(RewindState state)
+    {
+        rewindState = state;
+        playerController.enabled = false;
+        crtEffect.enabled = true;
+        audioSource.Play();
+
+        if (state.Equals(RewindState.Interval))
+        {
+            rewindCoroutine = StartCoroutine(RewindByInterval(0.002f));
+        }
+    }
+
+    private void StopRewind()
+    {
+        if (rewindState.Equals(RewindState.Interval))
+        {
+            StopCoroutine(rewindCoroutine);
+        }
+
+        rewindState = RewindState.None;
+        playerController.enabled = true;
+        crtEffect.enabled = false;
+        audioSource.Stop();
     }
 }

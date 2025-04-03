@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                rb.velocity = new Vector3(rb.velocity.x, Mathf.Sqrt(jumpForce), rb.velocity.z);
+                rb.AddForce(new Vector3(0f, jumpForce, 0f), ForceMode.Impulse);
                 animator.SetTrigger("toJump");
             }
         }

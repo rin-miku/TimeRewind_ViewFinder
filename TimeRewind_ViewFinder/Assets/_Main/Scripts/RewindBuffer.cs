@@ -5,7 +5,6 @@ public class RewindBuffer<T>
     private const int defaultCapacity = 3000;
     private T[] buffers = new T[defaultCapacity];
     private int position;
-    private int rewindPosition;
 
     public void Resize()
     {
