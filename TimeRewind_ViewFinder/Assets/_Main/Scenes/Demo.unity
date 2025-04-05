@@ -20502,7 +20502,7 @@ Transform:
   m_GameObject: {fileID: 1029129213}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.294525, y: 0.008000005, z: 5.742584}
+  m_LocalPosition: {x: 15.294525, y: 0.04, z: 5.742584}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -23544,7 +23544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3541426426991021633, guid: 2ec8d429dd3d48a4ca3335ab3d2a744f, type: 3}
       propertyPath: rotationSpeed
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6994763228553872554, guid: 2ec8d429dd3d48a4ca3335ab3d2a744f, type: 3}
       propertyPath: m_Constraints
@@ -28446,7 +28446,7 @@ GameObject:
   - component: {fileID: 1402281449}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

@@ -93,7 +93,7 @@ public class RewindController : MonoBehaviour
 
         if (state.Equals(RewindState.Interval))
         {
-            rewindCoroutine = StartCoroutine(RewindByInterval(0.002f));
+            rewindCoroutine = StartCoroutine(RewindByInterval(0.005f));
         }
     }
 
