@@ -103,6 +103,8 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 5
   rotationSpeed: 10
+  isGrounded: 0
+  isRunning: 0
 --- !u!114 &8343287170603863037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +167,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!136 &4697126122606425097
 CapsuleCollider:

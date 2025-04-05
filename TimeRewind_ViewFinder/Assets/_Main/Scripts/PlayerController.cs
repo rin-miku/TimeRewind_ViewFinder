@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     private Animator animator;
-    private bool isGrounded;
-    private bool isRunning;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isRunning;
     private Vector3 inputDirection;
 
     void Start()
@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
             rb.MoveRotation(Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime));
         }
 
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
         if (isGrounded)
         {
             isRunning = inputDirection.magnitude > 0;
@@ -47,6 +46,22 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 move = inputDirection * moveSpeed;
             rb.MovePosition(rb.position + move * Time.fixedDeltaTime);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.transform.tag.Equals("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.tag.Equals("Ground"))
+        {
+            isGrounded = false;
         }
     }
 }

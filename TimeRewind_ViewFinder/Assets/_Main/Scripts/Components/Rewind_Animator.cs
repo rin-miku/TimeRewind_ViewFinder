@@ -144,14 +144,6 @@ public class Rewind_Animator : RewindBase
                 animator.SetBool(parameter.nameHash, parameter.value.Equals(1));
                 break;
             case AnimatorControllerParameterType.Trigger:
-                if (parameter.value.Equals(0))
-                {
-                    animator.ResetTrigger(parameter.nameHash);
-                }
-                else
-                {
-                    animator.SetTrigger(parameter.nameHash);
-                }
                 break;
         }
     }
